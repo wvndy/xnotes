@@ -23,6 +23,18 @@ class AppColors {
   static const Color iconBlue = Color(0xFF2563EB);
   static const Color gold = Color(0xFFD4A017);
   static const Color goldBg = Color(0xFFFEF3C7);
+
+  static const LinearGradient headerGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [primary, primaryDark],
+  );
+}
+
+class AppRadius {
+  static const double card = 24;
+  static const double section = 20;
+  static const double field = 14;
 }
 
 class AppTheme {

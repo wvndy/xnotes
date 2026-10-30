@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../app/routes.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_logo.dart';
+import '../widgets/gradient_header.dart';
 import '../widgets/responsive_center.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,111 +32,146 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ResponsiveCenter(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(24, 40, 24, 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Center(child: AppLogo(size: 64)),
-                const SizedBox(height: 16),
-                const Center(
-                  child: Text(
-                    'Xnotes',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
+      body: ResponsiveCenter(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const GradientHeader(
+                height: 260,
+                padding: EdgeInsets.fromLTRB(28, 56, 28, 0),
+                leading: AppLogo(
+                  size: 60,
+                  background: Colors.white,
+                  iconColor: AppColors.primary,
                 ),
-                const SizedBox(height: 40),
-                const Text(
-                  'Masuk untuk melanjutkan',
+                title: Text(
+                  'Xnotes',
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 24),
-                TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
-                    prefixIcon: Icon(
-                      Icons.email_outlined,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
+                subtitle: Text(
+                  'Simpan setiap ide dalam satu tempat.',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: _obscure,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    prefixIcon: const Icon(
-                      Icons.lock_outline,
-                      color: AppColors.textSecondary,
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscure
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
-                        color: AppColors.textSecondary,
+              ),
+              Transform.translate(
+                offset: const Offset(0, -32),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.fromLTRB(24, 28, 24, 28),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppRadius.card),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.textPrimary.withValues(alpha: 0.08),
+                        blurRadius: 24,
+                        offset: const Offset(0, 10),
                       ),
-                      onPressed: () => setState(() => _obscure = !_obscure),
-                    ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 28),
-                ElevatedButton(onPressed: _login, child: const Text('Masuk')),
-                const SizedBox(height: 24),
-                Row(
-                  children: const [
-                    Expanded(child: Divider(color: AppColors.border)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Text(
-                        'atau',
-                        style: TextStyle(color: AppColors.textSecondary),
-                      ),
-                    ),
-                    Expanded(child: Divider(color: AppColors.border)),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                OutlinedButton(
-                  onPressed: _login,
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(52),
-                    side: const BorderSide(color: AppColors.border),
-                    foregroundColor: AppColors.textPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      _GoogleIcon(),
-                      SizedBox(width: 10),
-                      Text(
-                        'Masuk dengan Google',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        'Masuk untuk melanjutkan',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      TextField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          hintText: 'Email',
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: _passwordController,
+                        obscureText: _obscure,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          prefixIcon: const Icon(
+                            Icons.lock_outline,
+                            color: AppColors.textSecondary,
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscure
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: AppColors.textSecondary,
+                            ),
+                            onPressed: () =>
+                                setState(() => _obscure = !_obscure),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 28),
+                      ElevatedButton(
+                        onPressed: _login,
+                        child: const Text('Masuk'),
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: const [
+                          Expanded(child: Divider(color: AppColors.border)),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                            child: Text(
+                              'atau',
+                              style: TextStyle(color: AppColors.textSecondary),
+                            ),
+                          ),
+                          Expanded(child: Divider(color: AppColors.border)),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      OutlinedButton(
+                        onPressed: _login,
+                        style: OutlinedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(52),
+                          side: const BorderSide(color: AppColors.border),
+                          foregroundColor: AppColors.textPrimary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              AppRadius.field,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            _GoogleIcon(),
+                            SizedBox(width: 10),
+                            Text(
+                              'Masuk dengan Google',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

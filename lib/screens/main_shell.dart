@@ -31,7 +31,7 @@ class _MainShellState extends State<MainShell> {
     };
 
     return Scaffold(
-      body: SafeArea(child: body),
+      body: SafeArea(top: false, child: body),
       floatingActionButton: _index == 0
           ? FloatingActionButton(
               onPressed: () => Navigator.pushNamed(context, AppRoutes.addNote),
@@ -47,6 +47,8 @@ class _MainShellState extends State<MainShell> {
         backgroundColor: Colors.white,
         indicatorColor: AppColors.pastelBlue,
         surfaceTintColor: Colors.transparent,
+        height: 68,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
@@ -83,41 +85,43 @@ class PlaceholderTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 84,
-              height: 84,
-              decoration: const BoxDecoration(
-                color: AppColors.pastelBlue,
-                shape: BoxShape.circle,
+    return SafeArea(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 84,
+                height: 84,
+                decoration: const BoxDecoration(
+                  color: AppColors.pastelBlue,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, size: 38, color: AppColors.primary),
               ),
-              child: Icon(icon, size: 38, color: AppColors.primary),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+              const SizedBox(height: 20),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.textSecondary,
-                height: 1.5,
+              const SizedBox(height: 8),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.textSecondary,
+                  height: 1.5,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
